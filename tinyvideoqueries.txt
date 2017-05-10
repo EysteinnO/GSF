@@ -1,0 +1,112 @@
+#3. Write a query to display the movie title, movie year, and movie cost for all movies that contain the word “hope” anywhere in the title. Sort
+#the results in ascending order by title. (The results are shown in figure P7.55.)
+SELECT MOVIE_TITLE, MOVIE_YEAR, MOVIE_COST
+FROM movie WHERE MOVIE_TITLE LIKE '%Hope%';
+
+#4. Write a query to display the movie title, movie year, and movie genre for all action movies. (The results are shown in Figure P7.56.)
+SELECT MOVIE_TITLE, MOVIE_YEAR, MOVIE_GENRE
+FROM movie WHERE MOVIE_GENRE LIKE 'Action';
+
+#5. Write a query to display the movie number, movie title, and movie cost for all movies with a cost greater than $40. (The results are shown
+#in Figure P7.57.)
+SELECT MOVIE_NUM, MOVIE_TITLE, MOVIE_COST 
+FROM movie WHERE MOVIE_COST > '40';
+
+#6. Write a query to display the movie number, movie title, movie cost, and movie genre for all movies that are either action or comedy movies
+#and that have a cost that is less than $50. Sort the results in ascending order by genre. (The results are shown in Figure P7.58.)
+SELECT MOVIE_NUM, MOVIE_TITLE, MOVIE_COST, MOVIE_GENRE 
+FROM movie WHERE MOVIE_COST < '50' AND MOVIE_GENRE LIKE 'Action' OR MOVIE_GENRE = 'Comedy'
+ORDER BY MOVIE_GENRE ASC;
+
+#7. Write a query to display the movie number, and movie description for all movies where the movie description is a combination of the movie
+#title, movie year, and movie genre with the movie year enclosed in parentheses. (The results are shown in Figure P7.59.)
+SELECT MOVIE_NUM, CONCAT(movie_title, '(', movie_year, ')', movie_genre) AS 'Movie Description'
+FROM movie;
+
+#8. Write a query to display the movie genre and the number of movies in each genre. (The results are shown in Figure P7.60.)
+SELECT MOVIE_GENRE AND COUNT(MOVIE_TITLE) 
+FROM MOVIE;
+
+#9. Write a query to display the average cost of all of the movies. (The results are shown in Figure P7.61.)
+SELECT AVG(MOVIE_COST) as 'Average Movie Cost'
+FROM movie;
+
+#10. Write a query to display the movie genre and average cost of movies in each genre. (The results are shown in Figure P7.62.)
+SELECT MOVIE_GENRE, AVG(movie_cost) as 'Average Cost'
+FROM MOVIE;
+
+#11. Write a query to display the movie title, movie genre, price description, and price rental fee for all movies with a price code. (The results
+#are shown in Figure P7.63.)
+SELECT movie.MOVIE_TITLE, movie.MOVIE_GENRE, price.PRICE_DESCRIPTION, price.PRICE_RENTFEE
+FROM movie INNER JOIN PRICE ON movie.PRICE_CODE = price.PRICE_CODE
+WHERE price.PRICE_CODE > 0;
+
+#12. Write a query to display the movie genre and average price rental fee for movies in each genre that have a price. (The results are shown
+#in Figure P7.64.)
+SELECT movie.MOVIE_GENRE AS Movenondvor,
+	(
+		SELECT AVG(price.PRICE_RENTFEE)
+        FROM PRICE
+        WHERE PRICE.PRICE_CODE = MOVIE.PRICE_CODE
+	) avg_price
+FROM movie;
+
+#13. Write a query to display the movie title, movie year, and the movie cost divided by the price rental fee for each movie that has a price to
+#determine the number of rentals it will take to break even on the purchase of the movie. (The results are shown in Figure P7.65.).
+SELECT movie.MOVIE_TITLE, movie.MOVIE_YEAR, movie.MOVIE_COST / price.PRICE_RENTFEE AS Breakeven rentals
+FROM MOVIE INNER JOIN PRICE on movie.PRICE_CODE = price.PRICE_CODE;
+
+#14. Write a query to display the movie title and movie year for all movies that have a price code. (The results are shown in Figure P7.66.)
+SELECT movie.MOVIE_TITLE, movie.MOVIE_YEAR
+FROM movie INNER JOIN PRICE on movie.PRICE_CODE = price.PRICE_CODE
+WHERE price.PRICE_CODE > 0;
+
+#15. Write a query to display the movie title, movie year, and movie cost for all movies that have a cost between $44.99 and $49.99. (The
+#results are shown in Figure P7.67.)
+SELECT movie.MOVIE_TITLE, movie.MOVIE_YEAR, movie.MOVIE_COST
+FROM MOVIE
+WHERE movie.MOVIE_COST BETWEEN 44.99 AND  49.99;
+
+#16. Write a query to display the movie title, movie year, price description, and price rental fee for all movies that are in the genres family,
+#comedy, or drama. (The results are shown in Figure P7.68.)
+SELECT movie.MOVIE_TITLE, movie.MOVIE_YEAR, price.PRICE_DESCRIPTION, price.PRICE_RENTFEE
+FROM MOVIE INNER JOIN PRICE ON MOVIE.PRICE_CODE = PRICE.PRICE_CODE
+WHERE MOVIE.MOVIE_GENRE LIKE 'Family' OR MOVIE.MOVIE_GENRE LIKE 'Comedy' OR MOVIE.MOVIE_GENRE LIKE 'Drama';
+
+#17. Write a query to display the minimum balance, maximum balance, and average balance for memberships that have a rental. (The results
+#are shown in Figure P7.71.) 
+SELECT MIN(membership.MEM_BALANCE), MAX(membership.MEM_BALANCE), AVG(membership.MEM_BALANCE)
+FROM membership;
+
+#18. Write a query to display the membership name (concatenate the first name and last name with a space between them into a single
+#column), membership address (concatenate the street, city, state, and zip codes into a single column with spaces. (The results are shown
+#in Figure P7.72.)
+SELECT CONCAT(membership.MEM_FNAME, ' ', membership.MEM_LNAME) AS Membership_Name,
+	(
+		SELECT CONCAT(membership.MEM_STREET, ' ', membership.MEM_CITY, ' ', membership.MEM_STATE, ' ', membership.MEM_ZIP)
+        FROM membership
+	) Membership_Adress
+FROM membership;
+# I have no idea why this one doesnt work.
+
+#19. Write a query to display the rental number, rental date, video number, movie title, due date, and return date for all videos that were
+#returned after the due date. Sort the results by rental number and movie title. (The results are shown in Figure P7.73.)
+SELECT rental.RENT_NUM, rental.RENT_DATE, video.VID_NUM, movie.MOVIE_TITLE
+
+
+
+
+	
+
+
+
+
+        
+
+	
+
+
+
+
+
+
